@@ -13,7 +13,20 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
     </style>
+    <!-- Splash   -->
     <style name="Theme.DialogFragment" parent="Theme.GithubClient">
         <item name="windowNoTitle">true</item>
+    </style>
+    <!-- Search   -->
+    <style name="Widget.EditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:background">@drawable/rounded_text_field</item>
+        <item name="android:textColorHint">@color/grey_400</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    <style name="Widget.RepoItem.Layout" parent="Theme.GithubClient">
+        <item name="android:layout_height">88dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:background">@drawable/rounded_search_repo_item</item>
     </style>
 </resources>
