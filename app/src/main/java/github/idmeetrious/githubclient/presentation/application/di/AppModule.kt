@@ -9,7 +9,8 @@ import javax.inject.Singleton
     includes = [
         DbModule::class,
         RemoteModule::class,
-        RepositoryModule::class
+        RepositoryModule::class,
+        UserCaseModule::class
     ]
 )
 class AppModule(private val context: Context) {

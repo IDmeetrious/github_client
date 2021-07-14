@@ -15,4 +15,8 @@ class RemoteDataSourceImpl(
             dtoList.map { dto -> mapper.mapToEntity(dto) }
         }
     }
+
+    override fun downloadRepository(uri: String): Single<ByteArray> {
+        return api.downloadRepoZip(uri)
+    }
 }

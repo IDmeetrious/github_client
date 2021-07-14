@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.RepoItem.Layout">
+
+    <ImageView
+        android:id="@+id/repo_item_logo_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+    <TextView
+        android:id="@+id/repo_item_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/search_repo_item_name_text"
+        app:layout_constraintStart_toEndOf="@+id/repo_item_logo_iv"
+        app:layout_constraintTop_toTopOf="@+id/repo_item_logo_iv" />
+
+    <ImageButton
+        android:id="@+id/repo_item_download_ib"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_download_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/repo_item_open_ib"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_open_in_24"
+        app:layout_constraintBottom_toBottomOf="@+id/repo_item_download_ib"
+        app:layout_constraintEnd_toStartOf="@+id/repo_item_download_ib"
+        app:layout_constraintTop_toTopOf="@+id/repo_item_download_ib" />
+</androidx.constraintlayout.widget.ConstraintLayout>
