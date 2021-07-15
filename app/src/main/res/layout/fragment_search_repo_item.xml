@@ -22,7 +22,7 @@
             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
         <TextView
-            android:id="@+id/repo_item_name_tv"
+            android:id="@+id/search_repo_item_login_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

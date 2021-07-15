@@ -16,10 +16,6 @@ class UseCaseModule {
         GetSavedRepositoriesUseCaseImpl(repository)
 
     @Provides
-    fun provideSaveRepositoryToFileUseCase(repository: Repository): SaveRepositoryToFileUseCase =
-        SaveRepositoryToFileUseCaseImpl(repository)
-
-    @Provides
     fun provideSaveRepositoryToDbUseCase(repository: Repository): SaveRepositoryToDbUseCase =
         SaveRepositoryToDbUseCaseImpl(repository)
 

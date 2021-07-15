@@ -1,14 +1,15 @@
 package github.idmeetrious.githubclient.presentation.ui.search
 
 import android.app.DownloadManager
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,11 +25,8 @@ import com.google.android.material.snackbar.Snackbar
 import github.idmeetrious.githubclient.databinding.FragmentSearchBinding
 import github.idmeetrious.githubclient.domain.common.State
 import github.idmeetrious.githubclient.domain.entities.GitRepo
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 
-private const val TAG = "SearchFragment"
 class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
@@ -46,7 +44,7 @@ class SearchFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = SearchAdapter()
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -58,6 +56,7 @@ class SearchFragment : Fragment() {
         val rootView = binding.root
         rv = binding.searchRv
         pb = binding.searchPb
+        adapter = SearchAdapter()
 
         return rootView
     }
@@ -114,8 +113,10 @@ class SearchFragment : Fragment() {
                     }
                     State.ERROR -> {
                         view?.let {
-                            Snackbar.make(it, "Can't load information, try again!",
-                                Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(
+                                it, "Can't load information, try again!",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
                         }
                         pb?.visibility = View.GONE
                         rv?.visibility = View.GONE
@@ -126,7 +127,6 @@ class SearchFragment : Fragment() {
                     }
                 }
             }
-            binding.searchPb
         }
     }
 
@@ -197,6 +197,9 @@ class SearchFragment : Fragment() {
 
     private fun downloadZip() {
         saveRepo?.let {
+            val manager =
+                requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+
             val path = "${it.url}/archive/master.zip"
             val request = DownloadManager.Request(Uri.parse(path))
                 .apply {
@@ -207,23 +210,24 @@ class SearchFragment : Fragment() {
                         "${it.owner.login}.zip"
                     )
                 }
-            val manager =
-                requireActivity().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-
-            lifecycleScope.launchWhenStarted {
-                manager.enqueue(request)
-            }.invokeOnCompletion { e ->
-                if(e == null){
-                    Log.i(TAG, "--> downloadZip: Completed")
-                    viewModel.saveToDb(it)
+            manager.enqueue(request)
+            val onComplete = object : BroadcastReceiver() {
+                override fun onReceive(context: Context?, intent: Intent?) {
+                    saveRepo?.let {
+                        viewModel.saveToDb(it)
+                    }
                 }
             }
+            requireActivity().registerReceiver(
+                onComplete,
+                IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+            )
         }
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        adapter = null
     }
 }

@@ -1,6 +1,5 @@
 package github.idmeetrious.githubclient.domain.repositories
 
-import github.idmeetrious.githubclient.domain.common.State
 import github.idmeetrious.githubclient.domain.entities.GitRepo
 import io.reactivex.rxjava3.core.Single
 
@@ -8,6 +7,5 @@ interface Repository {
     fun getUserRepositories(user: String): Single<List<GitRepo>>
     fun getSavedRepositories(): Single<List<GitRepo>>
     fun downloadRepositoryZip(uri: String): Single<ByteArray>
-    suspend fun saveRepositoryToFile(data: ByteArray): State
     suspend fun saveRepositoryToDb(gitRepo: GitRepo)
 }

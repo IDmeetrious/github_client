@@ -5,5 +5,5 @@ import github.idmeetrious.githubclient.domain.repositories.Repository
 class GetSavedRepositoriesUseCaseImpl(
     private val repository: Repository
 ): GetSavedRepositoriesUseCase {
-    override suspend fun invoke() = repository.getSavedRepositories()
+    override fun invoke() = repository.getSavedRepositories()
 }

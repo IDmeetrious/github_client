@@ -2,7 +2,6 @@ package github.idmeetrious.githubclient.data.repositories
 
 import github.idmeetrious.githubclient.data.datasource.local.LocalDataSource
 import github.idmeetrious.githubclient.data.datasource.remote.RemoteDataSource
-import github.idmeetrious.githubclient.domain.common.State
 import github.idmeetrious.githubclient.domain.entities.GitRepo
 import github.idmeetrious.githubclient.domain.repositories.Repository
 import io.reactivex.rxjava3.core.Single
@@ -19,9 +18,6 @@ class RepositoryImpl(
 
     override fun downloadRepositoryZip(uri: String): Single<ByteArray> =
         remoteDataSource.downloadRepository(uri)
-
-    override suspend fun saveRepositoryToFile(data: ByteArray): State =
-        localDataSource.saveRepoToFile(data)
 
     override suspend fun saveRepositoryToDb(gitRepo: GitRepo) =
         localDataSource.saveRepoToDb(gitRepo)
