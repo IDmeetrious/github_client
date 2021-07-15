@@ -8,15 +8,13 @@ import github.idmeetrious.githubclient.domain.usecase.GetUserRepositoriesUseCase
 import github.idmeetrious.githubclient.domain.usecase.SaveRepositoryToDbUseCase
 import github.idmeetrious.githubclient.presentation.application.App
 import io.reactivex.rxjava3.disposables.Disposable
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-private const val TAG = "SearchViewModel"
-
 class SearchViewModel : ViewModel() {
+    private val ioScope = CoroutineScope(Dispatchers.IO + Job())
+
     @Inject
     lateinit var getRepositoriesUseCase: GetUserRepositoriesUseCase
 
@@ -48,9 +46,16 @@ class SearchViewModel : ViewModel() {
                 }
             }
             .subscribe({
-                viewModelScope.launch {
-                    _repos.value = it
+                if (it.isNullOrEmpty()){
+                    viewModelScope.launch {
+                        _apiState.value = State.ERROR
+                    }
+                }else{
+                    viewModelScope.launch {
+                        _repos.value = it
+                    }
                 }
+
             }, {
                 viewModelScope.launch {
                     _apiState.value = State.ERROR
@@ -59,7 +64,7 @@ class SearchViewModel : ViewModel() {
     }
 
     fun saveToDb(gitRepo: GitRepo) {
-        CoroutineScope(Dispatchers.IO).launch {
+        ioScope.launch {
             saveRepositoryToDbUseCase.invoke(gitRepo)
         }
     }
@@ -67,5 +72,6 @@ class SearchViewModel : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         disposable?.dispose()
+        ioScope.cancel()
     }
 }

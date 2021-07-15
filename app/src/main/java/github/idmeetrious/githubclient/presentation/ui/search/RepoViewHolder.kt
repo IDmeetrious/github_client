@@ -15,7 +15,7 @@ class RepoViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
     init {
         view.let {
-            nameTv = it.findViewById(R.id.repo_item_name_tv)
+            nameTv = it.findViewById(R.id.search_repo_item_login_tv)
             logoIv = it.findViewById(R.id.repo_item_logo_iv)
             openWebBtn = it.findViewById(R.id.repo_item_open_ib)
             downloadBtn = it.findViewById(R.id.repo_item_download_ib)
