@@ -1,6 +1,7 @@
 package github.idmeetrious.githubclient.presentation.application
 
 import android.app.Application
+import android.content.Context
 import github.idmeetrious.githubclient.presentation.application.di.AppModule
 import github.idmeetrious.githubclient.presentation.application.di.DbModule
 import github.idmeetrious.githubclient.presentation.application.di.component.AppComponent
@@ -15,6 +16,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
         appComponent = DaggerAppComponent.builder()
             .appModule(AppModule(applicationContext))
             .dbModule(DbModule(applicationContext))

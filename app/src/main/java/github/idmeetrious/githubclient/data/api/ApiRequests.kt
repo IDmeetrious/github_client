@@ -10,4 +10,9 @@ interface ApiRequests {
     fun getReposByUser(
         @Path("username") user: String
     ): Single<List<GitRepoDto>>
+
+    @GET("/repos/{uri}/zipball/master")
+    fun downloadRepoZip(
+        @Path("url") url: String
+    ): Single<ByteArray>
 }

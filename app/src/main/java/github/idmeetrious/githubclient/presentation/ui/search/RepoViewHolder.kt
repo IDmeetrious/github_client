@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import github.idmeetrious.githubclient.R
 
-class RepoViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
+class RepoViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
     var nameTv: TextView
     val logoIv: ImageView
     val openWebBtn: ImageButton

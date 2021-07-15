@@ -5,4 +5,5 @@ import io.reactivex.rxjava3.core.Single
 
 interface RemoteDataSource {
     fun getRepositories(name: String): Single<List<GitRepo>>
+    fun downloadRepository(uri: String): Single<ByteArray>
 }

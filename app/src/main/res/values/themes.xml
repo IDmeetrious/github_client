@@ -24,9 +24,14 @@
         <item name="android:singleLine">true</item>
     </style>
     <style name="Widget.RepoItem.Layout" parent="Theme.GithubClient">
-        <item name="android:layout_height">88dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:padding">16dp</item>
-        <item name="android:background">@drawable/rounded_search_repo_item</item>
+        <item name="android:textColor">@color/blue_600</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="cardCornerRadius">12dp</item>
     </style>
 </resources>

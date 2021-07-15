@@ -8,4 +8,5 @@
     <string name="search_field_hint">login</string>
     <string name="search_send_query_button">Send search query</string>
     <string name="search_repo_item_name_text">Repository</string>
+    <string name="search_repo_item_uri_text">github.com/repo</string>
 </resources>

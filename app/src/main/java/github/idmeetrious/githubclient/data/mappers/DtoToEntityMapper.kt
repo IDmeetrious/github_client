@@ -10,6 +10,7 @@ class DtoToEntityMapper {
             return GitRepo(
                 id = it.id,
                 name = it.name,
+                url = it.url,
                 owner = GitOwner(
                     it.owner.id,
                     it.owner.login,

@@ -7,6 +7,6 @@ import io.reactivex.rxjava3.core.Single
 class GetUserRepositoriesUseCaseImpl(
     private val repository: Repository
 ) : GetUserRepositoriesUseCase {
-    override suspend fun invoke(name: String): Single<List<GitRepo>> =
+    override fun invoke(name: String): Single<List<GitRepo>> =
         repository.getUserRepositories(name)
 }

@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import github.idmeetrious.githubclient.data.db.entities.GitRepoData
+import github.idmeetrious.githubclient.domain.common.State
 import io.reactivex.rxjava3.core.Single
 
 @Dao

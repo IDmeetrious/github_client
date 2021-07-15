@@ -7,15 +7,11 @@ import github.idmeetrious.githubclient.presentation.ui.splash.SplashDialogFragme
 
 class MainActivity : AppCompatActivity() {
     private var splashDialog: SplashDialogFragment? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         splashDialog = SplashDialogFragment()
-    }
-
-    override fun onStart() {
-        super.onStart()
         splashDialog?.show(supportFragmentManager, "SplashDialogFragment")
     }
 
